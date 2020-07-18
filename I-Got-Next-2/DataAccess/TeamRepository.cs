@@ -29,5 +29,32 @@ namespace I_Got_Next_2.DataAccess
                 return team;
             }
         }
+
+        public IEnumerable<TeamsWithPlayers> GetTeamsWithPlayers()
+        {
+            var sql = @"select *
+                        from Team
+                        where IsAvailable = 0";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var teams = db.Query<TeamsWithPlayers>(sql);
+
+                return teams;
+            }
+        }
+
+        public NewTeam AddedTeam(NewTeam team)
+        {
+            var sql = @"insert into Team (CourtId, [Date], TeamName, IsAvailable, IsTeamCountFull)
+                        values (@CourtId, getDate(), @TeamName, 0, 1)";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var newTeam = db.QueryFirstOrDefault<NewTeam>(sql, team);
+
+                return newTeam;
+            }
+        }
     }
 }

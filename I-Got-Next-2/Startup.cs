@@ -34,6 +34,11 @@ namespace I_Got_Next_2
             services.AddTransient<CourtRepository>();
             services.AddTransient<AdminRepository>();
             services.AddSingleton<IConfiguration>(Configuration);
+
+            services.AddCors(options =>
+                options.AddPolicy("ItsAllGood",
+                    builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin())
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +52,8 @@ namespace I_Got_Next_2
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("ItsAllGood");
 
             app.UseAuthorization();
 
