@@ -10,6 +10,7 @@ import NewTeam from '../components/pages/NewTeam/NewTeam';
 import Admin from '../components/pages/Admin/Admin';
 import CurrentGame from '../components/pages/CurrentGame/CurrentGame';
 import AvailablePlayers from '../components/pages/AvailablePlayers/AvailablePlayers';
+import AddTeam from '../components/pages/NewTeam/AddTeam';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/teams" exact component={Teams} />
-          <Route path="/teams/new" exact component={NewTeam} />
+          <Route path="/teams/new" exact component={AddTeam} />
           <Route path="/adminportal" exact component={Admin} />
           <Route path="/currentgame" exact component={CurrentGame} />
           <Route path="/availableplayers" exact component={AvailablePlayers} />

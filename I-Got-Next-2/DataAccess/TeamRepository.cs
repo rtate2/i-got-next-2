@@ -44,16 +44,32 @@ namespace I_Got_Next_2.DataAccess
             }
         }
 
-        public NewTeam AddedTeam(NewTeam team)
+        public Team AddedTeam(NewTeam team)
         {
-            var sql = @"insert into Team (CourtId, [Date], TeamName, IsAvailable, IsTeamCountFull)
-                        values (@CourtId, getDate(), @TeamName, 0, 1)";
+            var sql = @"insert into Team ([Date], TeamName, IsAvailable, IsTeamCountFull)
+                        output inserted.*
+                        values (getDate(), @TeamName, 0, @IsTeamCountFull)";
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var newTeam = db.QueryFirstOrDefault<NewTeam>(sql, team);
+                var newTeam = db.QueryFirstOrDefault<Team>(sql, team);
 
                 return newTeam;
+            }
+        }
+
+        //admin removal of team availability
+        public Team UpdateSingleAvailabilityTeamStatus(int teamId)
+        {
+            var sql = @"update Team
+                        set IsAvailable = 1
+                        where TeamId = @teamId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var updatedTeam = db.QueryFirstOrDefault(sql, new { TeamId = teamId });
+
+                return updatedTeam;
             }
         }
     }

@@ -30,5 +30,43 @@ namespace I_Got_Next_2.DataAccess
                 return players;
             }
         }
+
+        public IEnumerable<Player> GetAvailablePlayers()
+        {
+            var sql = @"select *
+                        from Player
+                        where TeamId is null";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var results = db.Query<Player>(sql);
+
+                return results;
+            }
+        }
+
+        public Player UpdateSinglePlayerStatus(int playerId, int teamId, bool isTeamNull)
+        {
+            string sql;
+            if (isTeamNull == true)
+            {
+                sql = @"update Player
+                            set TeamId = null
+                            where PlayerId = @playerId";
+            }
+            else
+            {
+               sql = @"update Player
+                            set TeamId = @teamId
+                            where PlayerId = @playerId";
+            }
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var updatedPlayer = db.QueryFirstOrDefault(sql, new { TeamId = teamId, PlayerId = playerId });
+
+                return updatedPlayer;
+            }
+        }
     }
 }

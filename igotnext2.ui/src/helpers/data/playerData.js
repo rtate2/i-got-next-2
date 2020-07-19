@@ -9,4 +9,13 @@ const getAllPlayers = () => new Promise((resolve, reject) => {
     .catch((errFromGetAllTeams) => reject(errFromGetAllTeams));
 });
 
-export default { getAllPlayers };
+const getAvailablePlayers = () => new Promise((resolve, reject) => {
+  axios.get('https://localhost:44317/api/players/availableplayers')
+    .then((result) => {
+      const allAvailablePlayers = result.data;
+      resolve(allAvailablePlayers);
+    })
+    .catch((errFromGetAllTeams) => reject(errFromGetAllTeams));
+});
+
+export default { getAllPlayers, getAvailablePlayers };

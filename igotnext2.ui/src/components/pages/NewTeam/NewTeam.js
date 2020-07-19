@@ -29,17 +29,17 @@ class NewTeam extends React.Component {
   saveTeamEvent = (e) => {
     e.preventDefault();
     const newTeam = {
-      TeamName: this.state.teamName,
-      Date: '',
+      teamName: this.state.teamName,
+      date: '',
       // time: this.state.time,
       player1: this.state.player1,
       player2: this.state.player2,
       player3: this.state.player3,
       player4: this.state.player4,
       player5: this.state.player5,
-      IsAvailable: this.state.isAvailable,
-      IsTeamCountFull: this.state.isTeamCountFull,
-      CourtId: this.state.courtId,
+      isAvailable: this.state.isAvailable,
+      isTeamCountFull: this.state.isTeamCountFull,
+      courtId: this.state.courtId,
     };
     teamData.createTeam(newTeam)
       .then(() => {

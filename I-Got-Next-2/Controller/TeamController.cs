@@ -63,5 +63,13 @@ namespace I_Got_Next_2.Controller
                 return Created("", new object());
             }
         }
+
+        [HttpPut("team/{teamId}/isavailable")]
+        public IActionResult UpdateTeamAvailabilityStatus(int teamId)
+        {
+            var status = _teamRepository.UpdateSingleAvailabilityTeamStatus(teamId);
+
+            return Ok(status);
+        }
     }
 }

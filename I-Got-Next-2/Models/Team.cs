@@ -12,7 +12,6 @@ namespace I_Got_Next_2.Models
         public string TeamName { get; set; }
         public bool IsAvailable { get; set; }
         public bool IsTeamCountFull { get; set; }
-        public int CourtId { get; set; }
     }
 
     public class TeamsWithPlayers
@@ -33,7 +32,6 @@ namespace I_Got_Next_2.Models
         public int TeamId { get; set; }
         public DateTime Date { get; set; }
         public string TeamName { get; set; }
-        public int CourtId { get; set; }
         public bool IsAvailable { get; set; }
         public bool IsTeamCountFull { get; set; }
     }
