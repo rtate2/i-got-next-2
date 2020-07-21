@@ -18,6 +18,20 @@ const getTeamsWithPlayers = () => new Promise((resolve, reject) => {
     .catch((errFromGetAllTeams) => reject(errFromGetAllTeams));
 });
 
-const createTeam = (newTeam) => axios.post('https://localhost:44317/api/teams', newTeam);
+const createTeam = (newTeam) => new Promise((resolve, reject) => {
+  axios.post('https://localhost:44317/api/teams', newTeam)
+    .then((result) => {
+      const newlyCreatedTeam = result.data;
+      console.log(newlyCreatedTeam);
+      resolve(newlyCreatedTeam);
+    })
+    .catch((errFromGetAllTeams) => reject(errFromGetAllTeams));
+});
+
+// const createTeam = (newTeam) => axios.post('https://localhost:44317/api/teams', newTeam)
+//   .then((result) => {
+//     const newlyCreatedTeam = result.data;
+//     resol
+//   });
 
 export default { getAllTeams, getTeamsWithPlayers, createTeam };

@@ -49,16 +49,38 @@ namespace I_Got_Next_2.Controller
         }
 
         [HttpPut("player/{playerId}/team/{teamId}")]
-        public IActionResult UpdatePlayerTeamStatus(int teamId, Player player)
+        public IActionResult UpdatePlayerTeamStatus(int teamId, int playerId)
         {
+            var isAPlayer = _playerRespository.GetPlayerById(playerId);
+
+            var isATeam = _teamRepository.GetTeamById(teamId);
+
             var teamNull = false;
-            if(player.teamId == null)
+
+            if (isAPlayer != null && isATeam != null)
             {
-                teamNull = true;
+                if(isATeam.IsAvailable == false )
+                {
+                    teamNull = true;
+                }
+                // var status = _playerRespository.UpdateSinglePlayerStatus(playerId, teamId, teamNull);
             }
-            var status = _playerRespository.UpdateSinglePlayerStatus(player.playerId, teamId, teamNull);
+            else
+            {
+                return NotFound("No team found");
+            }
+
+            var status = _playerRespository.UpdateSinglePlayerStatus(playerId, teamId, teamNull);
 
             return Ok(status);
+        }
+
+        [HttpGet("player/{playerId}")]
+        public IActionResult GetPlayerById(int playerId)
+        {
+            var player = _playerRespository.GetPlayerById(playerId);
+
+            return Ok(player);
         }
     }
 }

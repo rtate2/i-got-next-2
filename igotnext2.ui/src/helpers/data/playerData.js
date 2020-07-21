@@ -18,4 +18,6 @@ const getAvailablePlayers = () => new Promise((resolve, reject) => {
     .catch((errFromGetAllTeams) => reject(errFromGetAllTeams));
 });
 
-export default { getAllPlayers, getAvailablePlayers };
+const updatePlayerTeamStatus = (playerId, teamId) => axios.put(`https://localhost:44317/api/players/player/${playerId}/team/${teamId}`, playerId, teamId);
+
+export default { getAllPlayers, getAvailablePlayers, updatePlayerTeamStatus };

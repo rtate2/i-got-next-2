@@ -68,5 +68,19 @@ namespace I_Got_Next_2.DataAccess
                 return updatedPlayer;
             }
         }
+
+        public Player GetPlayerById(int playerId)
+        {
+            var sql = @"select *
+                        from Player
+                        where PlayerId = @PlayerId";
+            
+            using(var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.QueryFirstOrDefault<Player>(sql, new { PlayerId = playerId });
+
+                return result;
+            }
+        }
     }
 }

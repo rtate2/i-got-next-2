@@ -17,6 +17,8 @@ namespace I_Got_Next_2.DataAccess
         {
             ConnectionString = config.GetConnectionString("IGotNext2");
         }
+
+        //get all teams
         public IEnumerable<Team> GetTeams()
         {
             var sql = @"select *
@@ -30,6 +32,7 @@ namespace I_Got_Next_2.DataAccess
             }
         }
 
+        //get teams with players -- won't use this call anymore due to changing how teams are created
         public IEnumerable<TeamsWithPlayers> GetTeamsWithPlayers()
         {
             var sql = @"select *
@@ -44,6 +47,7 @@ namespace I_Got_Next_2.DataAccess
             }
         }
 
+        //add new team
         public Team AddedTeam(NewTeam team)
         {
             var sql = @"insert into Team ([Date], TeamName, IsAvailable, IsTeamCountFull)
@@ -70,6 +74,21 @@ namespace I_Got_Next_2.DataAccess
                 var updatedTeam = db.QueryFirstOrDefault(sql, new { TeamId = teamId });
 
                 return updatedTeam;
+            }
+        }
+
+        //get team by Id
+        public Team GetTeamById(int teamId)
+        {
+            var sql = @"select *
+                        from Team
+                        where TeamId = @TeamId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.QueryFirstOrDefault<Team>(sql, new { TeamId = teamId });
+
+                return result;
             }
         }
     }

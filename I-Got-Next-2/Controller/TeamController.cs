@@ -71,5 +71,13 @@ namespace I_Got_Next_2.Controller
 
             return Ok(status);
         }
+
+        [HttpGet("team/{teamId}")]
+        public IActionResult GetTeamById(int teamId)
+        {
+            var team = _teamRepository.GetTeamById(teamId);
+
+            return Ok(team);
+        }
     }
 }
