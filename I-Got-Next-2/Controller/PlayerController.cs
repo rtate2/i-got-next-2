@@ -35,6 +35,7 @@ namespace I_Got_Next_2.Controller
             return Ok(players);
         }
 
+        //get all available players not on a team
         [HttpGet("availableplayers")]
         public IActionResult GetAvailablePlayers()
         {
