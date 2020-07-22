@@ -10,6 +10,6 @@ namespace I_Got_Next_2.Models
         public int playerId { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        //public int? teamId { get; set; }
+        public int? teamId { get; set; }
     }
 }
