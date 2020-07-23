@@ -17,6 +17,7 @@ class AddTeam extends React.Component {
     // change in database, cs file and here
     IsTeamCountFull: false,
     selectedPlayers: [],
+    hasDuplicates: false,
   }
 
   componentDidMount() {
@@ -31,48 +32,64 @@ class AddTeam extends React.Component {
       .catch((error) => console.error(error, 'error from get available players'));
   }
 
+  checkDuplicates() {
+    const theTeamPlayers = [Number(this.state.player1), Number(this.state.player2), Number(this.state.player3), Number(this.state.player4), Number(this.state.player5)];
+
+    const checkId = (tempId, id) => tempId === id;
+
+    for (let i = 0; i < theTeamPlayers.length; i + 1) {
+      if (checkId(theTeamPlayers[0], theTeamPlayers[i + 1])) {
+        this.setState({ hasDuplicates: true });
+      }
+    }
+  }
+
   saveTeamEvent = (e) => {
     e.preventDefault();
-    // create an array to hold players
-    const theTeamPlayers = [Number(this.state.player1), Number(this.state.player2), Number(this.state.player3), Number(this.state.player4), Number(this.state.player5)];
-    const tempPlayers = [];
+    this.checkDuplicates();
+    if (this.state.hasDuplicates) {
+      console.error('Please enter different users!');
+    } else {
+      // create an array to hold players
+      const theTeamPlayers = [Number(this.state.player1), Number(this.state.player2), Number(this.state.player3), Number(this.state.player4), Number(this.state.player5)];
 
-    theTeamPlayers.forEach((playas) => {
-      if (playas !== 0) {
-        tempPlayers.push(playas);
-      }
-    });
+      const tempPlayers = [];
 
-    if (tempPlayers.length === 5) {
-      this.setState({ isTeamCountFull: true });
-    }
-    const newTeam = {
-      teamName: this.state.teamName,
-      Date: moment(),
-      isAvailable: this.state.isAvailable,
-      isTeamCountFull: this.state.isTeamCountFull,
-    };
-    teamData.createTeam(newTeam)
-      .then((theCreateTeam) => {
-        // create a list to store the players
-        const newTeamPlayersId = [Number(this.state.player1), Number(this.state.player2), Number(this.state.player3), Number(this.state.player4), Number(this.state.player5)];
-        newTeamPlayersId.forEach((playerId) => {
-          console.log(playerId, 'new Team Players Id');
-          if (playerId !== 0) {
-            playerData.updatePlayerTeamStatus(playerId, theCreateTeam.teamId);
-            console.log(theCreateTeam.teamId, 'new Team Team Id');
-          }
-        });
-      })
-      .then(() => {
-        this.props.history.push('/teams');
-        // this.setState({
-        //   teamName: '',
-        // });
-        // this.setState({
-        //   teamName: '',
-        // });
+      theTeamPlayers.forEach((playas) => {
+        if (playas !== 0) {
+          tempPlayers.push(playas);
+        }
       });
+
+      if (tempPlayers.length === 5) {
+        this.setState({ isTeamCountFull: true });
+      }
+      const newTeam = {
+        teamName: this.state.teamName,
+        Date: moment(),
+        isAvailable: this.state.isAvailable,
+        isTeamCountFull: this.state.isTeamCountFull,
+      };
+      teamData.createTeam(newTeam)
+        .then((theCreateTeam) => {
+          // create a list to store the players
+          const newTeamPlayersId = [Number(this.state.player1), Number(this.state.player2), Number(this.state.player3), Number(this.state.player4), Number(this.state.player5)];
+          newTeamPlayersId.forEach((playerId) => {
+            if (playerId !== 0) {
+              playerData.updatePlayerTeamStatus(playerId, theCreateTeam.teamId);
+            }
+          });
+        })
+        .then(() => {
+          this.props.history.push('/teams');
+          // this.setState({
+          //   teamName: '',
+          // });
+          // this.setState({
+          //   teamName: '',
+          // });
+        });
+    }
   }
 
   handleFieldChange = (e) => {

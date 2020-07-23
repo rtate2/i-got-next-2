@@ -60,7 +60,7 @@ namespace I_Got_Next_2.Controller
 
             if (isAPlayer != null && isATeam != null)
             {
-                if(isATeam.IsAvailable == false )
+                if (isATeam.IsAvailable == false )
                 {
                     teamNull = true;
                 }
