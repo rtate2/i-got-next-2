@@ -12,6 +12,7 @@ import CurrentGame from '../components/pages/CurrentGame/CurrentGame';
 import AvailablePlayers from '../components/pages/AvailablePlayers/AvailablePlayers';
 // import AddTeam from '../components/pages/NewTeam/AddTeam';
 import Test from '../components/pages/NewTeam/Test/Test';
+import SingleTeamView from '../components/pages/SingleTeamView/SingleTeamView';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/adminportal" exact component={Admin} />
           <Route path="/currentgame" exact component={CurrentGame} />
           <Route path="/availableplayers" exact component={AvailablePlayers} />
+          <Route path="/teams/singleteamview/:teamId" exact component={SingleTeamView} />
         </Switch>
       </Router>
 

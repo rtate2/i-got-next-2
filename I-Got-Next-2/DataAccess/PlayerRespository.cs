@@ -82,5 +82,19 @@ namespace I_Got_Next_2.DataAccess
                 return result;
             }
         }
+
+        public IEnumerable<Player> GetPlayersByTeamId(int teamId)
+        {
+            var sql = @"select *
+                        from Player
+                        where TeamId = @TeamId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.Query<Player>(sql, new { TeamId = teamId });
+
+                return result;
+            }
+        }
     }
 }

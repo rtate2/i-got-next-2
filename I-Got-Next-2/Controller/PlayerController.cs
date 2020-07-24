@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using I_Got_Next_2.DataAccess;
 using I_Got_Next_2.Models;
-
+ 
 namespace I_Got_Next_2.Controller
 {
     [Route("api/players")]
@@ -22,6 +22,7 @@ namespace I_Got_Next_2.Controller
             _teamRepository = teamRepository;
         }
 
+        //get all players
         [HttpGet]
         public IActionResult GetAllPlayers()
         {
@@ -49,8 +50,9 @@ namespace I_Got_Next_2.Controller
             return Ok(players);
         }
 
+        //update player's team status
         [HttpPut("player/{playerId}/team/{teamId}")]
-        public IActionResult UpdatePlayerTeamStatus(int teamId, int playerId)
+        public IActionResult UpdatePlayerTeamStatus(int playerId, int teamId, Player player)
         {
             var isAPlayer = _playerRespository.GetPlayerById(playerId);
 
@@ -76,12 +78,27 @@ namespace I_Got_Next_2.Controller
             return Ok(status);
         }
 
+        //get player by Id
         [HttpGet("player/{playerId}")]
         public IActionResult GetPlayerById(int playerId)
         {
             var player = _playerRespository.GetPlayerById(playerId);
 
             return Ok(player);
+        }
+
+        //get player by TeamId
+        [HttpGet("team/{teamId}")]
+        public IActionResult GetPlayersByTeamId(int teamId)
+        {
+            var players = _playerRespository.GetPlayersByTeamId(teamId);
+
+            if (players == null)
+            {
+                return NotFound("Team does not exist. No players found.");
+            }
+
+            return Ok(players);
         }
     }
 }

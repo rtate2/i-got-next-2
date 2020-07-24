@@ -19,7 +19,7 @@ class Team extends React.Component {
           {<p>Date: {team.date}</p>}
           <div className="card-body">
             <h4 className="card-title">{team.teamName}</h4>
-            <Link className="btn btn-outline-dark teamBtn" to={`/teams/${team.teamId}`}>View Team</Link>
+            <Link className="btn btn-outline-dark teamBtn" to={`/teams/singleteamview/${team.teamId}`}>View Team</Link>
           </div>
         </div>
       </div>
