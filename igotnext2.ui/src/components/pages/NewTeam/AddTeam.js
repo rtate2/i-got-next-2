@@ -97,7 +97,7 @@ class AddTeam extends React.Component {
     stateToChange[e.target.id] = e.target.value;
     // stateToChange.filteredPlayers = this.state.availablePlayers.filter((player) => player.playerId != e.target.value); // filter out the player that is selected
     stateToChange.availablePlayers = this.state.availablePlayers.map((player) => {
-      if (player.playerId == e.target.value) {
+      if (player.playerId === e.target.value) {
         return { ...player, isSelected: !player.isSelected };
       }
       return player;

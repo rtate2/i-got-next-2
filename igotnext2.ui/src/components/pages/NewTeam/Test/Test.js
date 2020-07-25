@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MultiSelect from 'react-multi-select-component';
 import moment from 'moment';
 import playerData from '../../../../helpers/data/playerData';
@@ -8,16 +8,11 @@ class Test extends React.Component {
   state = {
     players: [],
     selectedPlayers: [],
-    player1: null,
-    player2: null,
-    player3: null,
-    player4: null,
-    player5: null,
     teamName: '',
     Date: '',
     IsAvailable: true,
-    // change in database, cs file and here
     IsTeamCountFull: false,
+    // returnedPlayer: [],
   }
 
   componentDidMount() {
@@ -37,30 +32,45 @@ class Test extends React.Component {
 
   saveTeamEvent = (e) => {
     e.preventDefault();
+    const playerObjects = [];
+
     const newTeam = {
       teamName: this.state.teamName,
       Date: moment(),
       isAvailable: this.state.isAvailable,
       isTeamCountFull: this.state.isTeamCountFull,
     };
+    // This is part of Jameka's code I recently commented to try Jisie's
+    // this.state.selectedPlayers.forEach((player) => {
+    //   playerData.getPlayerById(player.value)
+    //     .then((returnedPlayer) => this.setState({ returnedPlayer: playerObjects.push(returnedPlayer) }));
+    //   // .then((returnedPlayer) => playerObjects.push(returnedPlayer));
+    //   console.log(this.returnedPlayer, 'error from returned player');
+    //   // debugger;
+    // });
     teamData.createTeam(newTeam)
       .then((theCreateTeam) => {
-        // create a list to store the players
-        const newTeamPlayersId = [Number(this.state.player1), Number(this.state.player2), Number(this.state.player3), Number(this.state.player4), Number(this.state.player5)];
-        newTeamPlayersId.forEach((playerId) => {
-          if (playerId !== 0) {
-            playerData.updatePlayerTeamStatus(playerId, theCreateTeam.teamId);
-          }
+        this.state.selectedPlayers.forEach((player) => {
+          console.log(player);
+          playerData.updatePlayerTeamStatus(player.value, theCreateTeam.teamId);
         });
+        debugger;
+
+        // create a list to store the players
+        // const newTeamPlayersId = [Number(this.state.player1), Number(this.state.player2), Number(this.state.player3), Number(this.state.player4), Number(this.state.player5)];
+        // newTeamPlayersId.forEach((playerId) => {
+        //   if (playerId !== 0) {
+        //     playerData.updatePlayerTeamStatus(playerId, theCreateTeam.teamId);
+        //   }});
+
+        // This is part of Jameka's code I recently commented to try Jisie's
+        // const playerObjectsArray = playerObjects;
+        // playerObjectsArray.forEach((playa) => {
+        //   playerData.updatePlayerTeamStatus(playa, theCreateTeam.teamId);
+        // });
       })
       .then(() => {
         this.props.history.push('/teams');
-        // this.setState({
-        //   teamName: '',
-        // });
-        // this.setState({
-        //   teamName: '',
-        // });
       });
   }
 

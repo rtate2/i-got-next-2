@@ -35,9 +35,14 @@ namespace I_Got_Next_2.DataAccess
         //get teams with players -- won't use this call anymore due to changing how teams are created
         public IEnumerable<TeamsWithPlayers> GetTeamsWithPlayers()
         {
+            //var sql = @"select *
+            //            from Team
+            //            where IsAvailable = 0";
+
             var sql = @"select *
-                        from Team
-                        where IsAvailable = 0";
+                        from Player
+                        join Team
+                        on player.TeamId = team.TeamId";
 
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -79,6 +84,21 @@ namespace I_Got_Next_2.DataAccess
 
         //get team by Id
         public Team GetTeamById(int teamId)
+        {
+            var sql = @"select *
+                        from Team
+                        where TeamId = @TeamId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.QueryFirstOrDefault<Team>(sql, new { TeamId = teamId });
+
+                return result;
+            }
+        }
+
+        //get single team
+        public Team GetSingleTeamById(int teamId)
         {
             var sql = @"select *
                         from Team

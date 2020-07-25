@@ -79,5 +79,21 @@ namespace I_Got_Next_2.Controller
 
             return Ok(team);
         }
+
+        [HttpGet("singleteam/{teamId}")]
+        public IActionResult GetSingleTeam(int teamId)
+        {
+            var team = _teamRepository.GetSingleTeamById(teamId);
+
+            if (team == null)
+            {
+                return NotFound("The team doesn't exist");
+            }
+
+            return Ok(team);
+
+
+
+        }
     }
 }

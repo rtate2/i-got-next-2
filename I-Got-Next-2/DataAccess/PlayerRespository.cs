@@ -48,7 +48,7 @@ namespace I_Got_Next_2.DataAccess
         public Player UpdateSinglePlayerStatus(int playerId, int teamId, bool isTeamNull)
         {
             string sql;
-            if (isTeamNull == true)
+            if (isTeamNull != true)
             {
                 sql = @"update Player
                             set TeamId = null
@@ -63,7 +63,7 @@ namespace I_Got_Next_2.DataAccess
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var updatedPlayer = db.QueryFirstOrDefault(sql, new { TeamId = teamId, PlayerId = playerId });
+                var updatedPlayer = db.QueryFirstOrDefault(sql, new { teamId = teamId, playerId = playerId });
 
                 return updatedPlayer;
             }
@@ -78,6 +78,20 @@ namespace I_Got_Next_2.DataAccess
             using(var db = new SqlConnection(ConnectionString))
             {
                 var result = db.QueryFirstOrDefault<Player>(sql, new { PlayerId = playerId });
+
+                return result;
+            }
+        }
+
+        public IEnumerable<Player> GetPlayersByTeamId(int teamId)
+        {
+            var sql = @"select *
+                        from Player
+                        where TeamId = @TeamId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.Query<Player>(sql, new { TeamId = teamId });
 
                 return result;
             }
