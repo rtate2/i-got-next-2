@@ -12,7 +12,7 @@ class Test extends React.Component {
     Date: '',
     IsAvailable: true,
     IsTeamCountFull: false,
-    returnedPlayer: [],
+    // returnedPlayer: [],
   }
 
   componentDidMount() {
@@ -40,16 +40,22 @@ class Test extends React.Component {
       isAvailable: this.state.isAvailable,
       isTeamCountFull: this.state.isTeamCountFull,
     };
-
-    this.state.selectedPlayers.forEach((player) => {
-      playerData.getPlayerById(player.value)
-        .then((returnedPlayer) => this.setState({ returnedPlayer: playerObjects.push(returnedPlayer) }));
-      // .then((returnedPlayer) => playerObjects.push(returnedPlayer));
-      console.log(this.returnedPlayer, 'error from returned player');
-      debugger;
-    });
+    // This is part of Jameka's code I recently commented to try Jisie's
+    // this.state.selectedPlayers.forEach((player) => {
+    //   playerData.getPlayerById(player.value)
+    //     .then((returnedPlayer) => this.setState({ returnedPlayer: playerObjects.push(returnedPlayer) }));
+    //   // .then((returnedPlayer) => playerObjects.push(returnedPlayer));
+    //   console.log(this.returnedPlayer, 'error from returned player');
+    //   // debugger;
+    // });
     teamData.createTeam(newTeam)
       .then((theCreateTeam) => {
+        this.state.selectedPlayers.forEach((player) => {
+          console.log(player);
+          playerData.updatePlayerTeamStatus(player.value, theCreateTeam.teamId);
+        });
+        debugger;
+
         // create a list to store the players
         // const newTeamPlayersId = [Number(this.state.player1), Number(this.state.player2), Number(this.state.player3), Number(this.state.player4), Number(this.state.player5)];
         // newTeamPlayersId.forEach((playerId) => {
@@ -57,10 +63,11 @@ class Test extends React.Component {
         //     playerData.updatePlayerTeamStatus(playerId, theCreateTeam.teamId);
         //   }});
 
-        const playerObjectsArray = playerObjects;
-        playerObjectsArray.forEach((playa) => {
-          playerData.updatePlayerTeamStatus(playa, theCreateTeam.teamId);
-        });
+        // This is part of Jameka's code I recently commented to try Jisie's
+        // const playerObjectsArray = playerObjects;
+        // playerObjectsArray.forEach((playa) => {
+        //   playerData.updatePlayerTeamStatus(playa, theCreateTeam.teamId);
+        // });
       })
       .then(() => {
         this.props.history.push('/teams');

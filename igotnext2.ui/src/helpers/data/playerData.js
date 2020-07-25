@@ -29,7 +29,7 @@ const getAvailablePlayers = () => new Promise((resolve, reject) => {
     .catch((errFromGetAllTeams) => reject(errFromGetAllTeams));
 });
 
-const updatePlayerTeamStatus = (player, teamId) => axios.put(`https://localhost:44317/api/players/player/${player.playerId}/team/${teamId}`, player, teamId);
+const updatePlayerTeamStatus = (playerId, teamId) => axios.put(`https://localhost:44317/api/players/player/${playerId}/team/${teamId}`, { teamId });
 
 const getPlayersByTeamId = (teamId) => new Promise((resolve, reject) => {
   axios.get(`https://localhost:44317/api/players/team/${teamId}`)
