@@ -62,11 +62,10 @@ namespace I_Got_Next_2.Controller
 
             if (isAPlayer != null && isATeam != null)
             {
-                if (isATeam.IsAvailable == false )
+                if (!isATeam.IsAvailable)
                 {
                     teamNull = true;
                 }
-                // var status = _playerRespository.UpdateSinglePlayerStatus(playerId, teamId, teamNull);
             }
             else
             {

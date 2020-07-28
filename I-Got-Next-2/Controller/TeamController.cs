@@ -91,9 +91,34 @@ namespace I_Got_Next_2.Controller
             }
 
             return Ok(team);
+        }
 
+        //select top two teams for each court
+        [HttpGet("playergameview/currentgames")]
+        public IActionResult GetGameTeams()
+        {
+            var teams = _teamRepository.GetCurrentGameTeams();
 
+            if (teams == null)
+            {
+                return NotFound("There are not any teams playing");
+            }
 
+            return Ok(teams);
+        }
+
+        //select team next to play
+        [HttpGet("playergameview/nexttoplay")]
+        public IActionResult GetNextTeamToPlay()
+        {
+            var nextTeam = _teamRepository.NextTeamToPlay();
+
+            if (nextTeam == null)
+            {
+                return NotFound("No team is signed up to play next");
+            }
+
+            return Ok(nextTeam);
         }
     }
 }

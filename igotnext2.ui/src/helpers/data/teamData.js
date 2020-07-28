@@ -15,7 +15,7 @@ const getTeamsWithPlayers = () => new Promise((resolve, reject) => {
       const allTeams = result.data;
       resolve(allTeams);
     })
-    .catch((errFromGetAllTeams) => reject(errFromGetAllTeams));
+    .catch((errFromGetTeamsWithPlayers) => reject(errFromGetTeamsWithPlayers));
 });
 
 const createTeam = (newTeam) => new Promise((resolve, reject) => {
@@ -24,14 +24,37 @@ const createTeam = (newTeam) => new Promise((resolve, reject) => {
       const newlyCreatedTeam = result.data;
       resolve(newlyCreatedTeam);
     })
-    .catch((errFromGetAllTeams) => reject(errFromGetAllTeams));
+    .catch((errFromCreateTeams) => reject(errFromCreateTeams));
 });
 
 const getSingleTeam = (teamId) => axios.get(`https://localhost:44317/api/teams/singleteam/${teamId}`);
+
+const getCurrentGames = () => new Promise((resolve, reject) => {
+  axios.get('https://localhost:44317/api/teams/playergameview/currentgames')
+    .then((result) => {
+      const gameTeams = result.data;
+      resolve(gameTeams);
+    })
+    .catch((errFromGetGameTeams) => reject(errFromGetGameTeams));
+});
+
+const getTeamUpNext = () => new Promise((resolve, reject) => {
+  axios.get('https://localhost:44317/api/teams/playergameview/nexttoplay')
+    .then((result) => {
+      const nextTeam = result.data;
+      resolve(nextTeam);
+    })
+    .catch((errFromGetNextTeams) => reject(errFromGetNextTeams));
+});
+
+const removeTeamFromList = (teamId) => axios.put(`https://localhost:44317/api/adminportal/remove/${teamId}`);
 
 export default {
   getAllTeams,
   getTeamsWithPlayers,
   createTeam,
   getSingleTeam,
+  getCurrentGames,
+  getTeamUpNext,
+  removeTeamFromList,
 };

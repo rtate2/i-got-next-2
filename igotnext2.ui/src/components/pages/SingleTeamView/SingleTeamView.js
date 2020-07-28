@@ -28,6 +28,13 @@ class SingleTeamView extends React.Component {
       .catch((error) => console.error(error, 'error from get players by team id'));
   }
 
+  // buildButtons = () => {
+  //   if (this.state.team.IsTeamCountFull) {
+  //     return <button className="btn btn-outline-dark">View Teams</button>;
+  //   }
+  //   return <button className="btn btn-outline-dark">Join Team</button>;
+  // }
+
   render() {
     const { team, players } = this.state;
 
@@ -35,8 +42,9 @@ class SingleTeamView extends React.Component {
       <div className="SingleTeamView">
         <h1>Single Team View</h1>
         <h3 className="card-title">{team.teamName}</h3>
-        {players.map((player) => <h5>{player.firstName} {player.lastName}</h5>)}
+        {players.map((player) => <h5 key={player.playerId}>{player.firstName} {player.lastName}</h5>)}
         <Link className="btn btn-success" to={'/teams'}>Back to Teams</Link>
+        {/* {this.buildButtons()} */}
       </div>
     );
   }

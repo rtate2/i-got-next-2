@@ -25,6 +25,7 @@ namespace I_Got_Next_2.Models
         public string TeamName { get; set; }
         public bool IsAvailable { get; set; }
         public bool IsTeamCountFull { get; set; }
+        public bool IsCurrentlyPlaying { get; set; }
     }
 
     public class NewTeam
@@ -34,5 +35,6 @@ namespace I_Got_Next_2.Models
         public string TeamName { get; set; }
         public bool IsAvailable { get; set; }
         public bool IsTeamCountFull { get; set; }
+        public bool IsCurrentlyPlaying { get; set; }
     }
 }

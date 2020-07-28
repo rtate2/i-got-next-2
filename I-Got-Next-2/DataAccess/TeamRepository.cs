@@ -22,7 +22,8 @@ namespace I_Got_Next_2.DataAccess
         public IEnumerable<Team> GetTeams()
         {
             var sql = @"select *
-                        from Team";
+                        from Team
+                        where IsAvailable = 1";
 
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -57,7 +58,7 @@ namespace I_Got_Next_2.DataAccess
         {
             var sql = @"insert into Team ([Date], TeamName, IsAvailable, IsTeamCountFull)
                         output inserted.*
-                        values (getDate(), @TeamName, 0, @IsTeamCountFull)";
+                        values (getDate(), @TeamName, 1, @IsTeamCountFull)";
 
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -109,6 +110,43 @@ namespace I_Got_Next_2.DataAccess
                 var result = db.QueryFirstOrDefault<Team>(sql, new { TeamId = teamId });
 
                 return result;
+            }
+        }
+
+        //get teams playing for each court
+        public IEnumerable<Team> GetCurrentGameTeams()
+        {
+            //var sql = @"select top 2 *
+            //            from Team
+            //            where IsAvailable = 1";
+
+            var sql = @"select *
+                        from Team
+                        where IsCurrentlyPlaying = 1";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var teams = db.Query<Team>(sql);
+
+                return teams;
+            }
+        }
+
+        public Team NextTeamToPlay()
+        {
+            var sql = @"Select top 1 * from
+                        (select top 3 *
+                        from Team
+                        where IsAvailable = 1
+                        order by [Date])
+                        as Result
+                        order by [Date] desc";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var team = db.QueryFirstOrDefault<Team>(sql);
+
+                return team;
             }
         }
     }
