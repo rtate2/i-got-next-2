@@ -13,9 +13,12 @@ namespace I_Got_Next_2.Controller
     public class AdminController : ControllerBase
     {
         AdminRepository _adminRepository;
-        public AdminController(AdminRepository repository)
+        PlayerRespository _playerRepository;
+
+        public AdminController(AdminRepository repository, PlayerRespository playerRespository)
         {
             _adminRepository = repository;
+            _playerRepository = playerRespository;
         }
 
         [HttpGet("admin/{adminname}/password/{adminpassword}")]
@@ -35,6 +38,13 @@ namespace I_Got_Next_2.Controller
         public IActionResult RemoveTeamFromList(int teamId)
         {
             var team = _adminRepository.RemoveTeam(teamId);
+
+            var freeAgentPlayers = _playerRepository.GetPlayersByTeamId(teamId);
+            foreach (var player in freeAgentPlayers)
+            {
+                _playerRepository.UpdateSinglePlayerStatus(player.playerId, teamId, true); // true makes a free agent
+            }
+
 
             return Ok(team);
         }

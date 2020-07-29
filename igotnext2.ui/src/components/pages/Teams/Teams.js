@@ -10,41 +10,24 @@ class Teams extends React.Component {
     teams: [],
     showTeamForm: false,
     authStatus: false,
-    teamPlayers: [],
+    players: [],
   }
 
   componentDidMount() {
-    this.getPlayersByTeamId();
+    this.getAllPlayers();
     teamData.getAllTeams()
       .then((theTeams) => this.setState({ teams: theTeams, authStatus: sessionStorage.getItem('adminId') != null }))
       .catch((error) => (error, 'error from teams with players'));
   }
 
-  getPlayersByTeamId = (teamId) => {
-    playerData.getPlayersByTeamId(teamId)
-      .then((teamPlayers) => this.setState({ teamPlayers }))
-      .catch((error) => console.error(error, 'error from get players by id'));
+  getAllPlayers = () => {
+    playerData.getAllPlayers()
+      .then((players) => this.setState({ players }))
+      .catch((error) => console.error(error, 'error from get all playes'));
   }
-
-  // teamData.createTeam(newTeam)
-  //     .then((theCreateTeam) => {
-  //       this.state.selectedPlayers.forEach((player) => {
-  //         playerData.updatePlayerTeamStatus(player.value, theCreateTeam.teamId);
-  //       });
-  //     })
-
-  //     this.getPlayersByTeamId(players);
-  //     playerData.updatePlayerTeamStatus(player.value, players.teamId)
-  //   }
-  // })
 
   removeTeam = (teamId) => {
     teamData.removeTeamFromList(teamId)
-      .then((playerTeamId) => {
-        this.state.teamPlayers.forEach((player) => {
-          playerData.updatePlayerTeamStatus(player.value, playerTeamId.teamId);
-        });
-      })
       .then(() => teamData.getAllTeams())
       .then((teams) => this.setState({ teams }))
       .catch((error) => console.error(error, 'error from remove team from list'));
