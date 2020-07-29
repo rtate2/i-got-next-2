@@ -26,7 +26,9 @@ class Team extends React.Component {
           {<p>Date: {team.date}</p>}
           <div className="card-body">
             <h4 className="card-title">{team.teamName}</h4>
-            <Link className="btn btn-outline-dark teamBtn" to={`/teams/singleteamview/${team.teamId}`}>View Team</Link>
+            <div>
+              <Link className="btn btn-primary btn-outline-dark teamBtn" to={`/teams/singleteamview/${team.teamId}`}>View Team</Link>
+            </div>
             { authStatus && <button className=" btn btn-danger" onClick={this.removeTeamEvent}>Delete</button> }
           </div>
         </div>

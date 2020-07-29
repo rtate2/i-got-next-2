@@ -1,0 +1,42 @@
+.CurrentGame{
+  background-color: white;
+  background-size: cover;
+  height: 100vh;
+}
+
+.Heading{
+  color: #293250
+}
+
+.CurrentGameTeams{
+  // border: 4px solid rgb(156, 149, 149);
+  background-color: #ffd55a;
+  border: 4px solid #293250;
+  border-style: inset;
+  padding: 15px 10px;
+  width: 400px;
+  height: auto;
+  display: inline-block;
+  margin: 50px;
+}
+
+.UpNextTeam{
+  // border: 4px solid rgb(156, 149, 149);
+  border: 4px solid #293250;
+  border-style: inset;
+  background-color: #6dd47e;
+  padding: 15px 10px;
+  width: 400px;
+  height: auto;
+  display: inline-block;
+  margin: 50px
+}
+
+.Court{
+  text-align: left;
+  color: #293250;
+}
+
+.nextTeam{
+  color: #293250;
+}
