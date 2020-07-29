@@ -52,7 +52,7 @@ namespace I_Got_Next_2.Controller
 
         //update player's team status
         [HttpPut("player/{playerId}/team/{teamId}")]
-        public IActionResult UpdatePlayerTeamStatus(int playerId, int teamId, Player player)
+        public IActionResult UpdatePlayerTeamStatus(int playerId, int teamId)
         {
             var isAPlayer = _playerRespository.GetPlayerById(playerId);
 
@@ -62,11 +62,10 @@ namespace I_Got_Next_2.Controller
 
             if (isAPlayer != null && isATeam != null)
             {
-                if (isATeam.IsAvailable == false )
+                if (!isATeam.IsAvailable)
                 {
                     teamNull = true;
                 }
-                // var status = _playerRespository.UpdateSinglePlayerStatus(playerId, teamId, teamNull);
             }
             else
             {

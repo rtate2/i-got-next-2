@@ -45,10 +45,10 @@ namespace I_Got_Next_2.DataAccess
             }
         }
 
-        public Player UpdateSinglePlayerStatus(int playerId, int teamId, bool isTeamNull)
+        public Player UpdateSinglePlayerStatus(int playerId, int teamId, bool TeamIsNotAvailable)
         {
             string sql;
-            if (isTeamNull != true)
+            if (TeamIsNotAvailable)
             {
                 sql = @"update Player
                             set TeamId = null

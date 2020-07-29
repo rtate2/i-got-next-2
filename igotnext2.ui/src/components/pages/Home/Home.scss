@@ -1,0 +1,40 @@
+.Home{
+  // background-color: #4e95ac;
+  // background-color: rgb(238, 236, 236);
+  background-color: rgb(243, 243, 243);
+  background-size: cover;
+  height: 100vh;
+  padding-top: 10%;
+}
+
+.Home2{
+  padding-top: 15%;
+}
+
+.h1{
+  font-family: Georgia, serif;
+}
+
+.btn {
+  padding: 14px 24px;
+  border: 0 none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+  outline: 0 none;
+}
+
+.createTeamButton{
+  margin: 25px;
+}
+
+.joinTeamButton{
+  margin: 25px;
+}
+
+.homeImage{
+  opacity: 0.8;
+}
