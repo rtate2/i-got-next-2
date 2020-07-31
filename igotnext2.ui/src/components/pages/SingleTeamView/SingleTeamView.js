@@ -46,9 +46,9 @@ class SingleTeamView extends React.Component {
 
   buildButtons = () => {
     if (this.state.team.isTeamCountFull === false) {
-      return <button className="btn btn-outline-dark">Join Team</button>;
+      return <button className="btn btn-primary btn-outline-dark" onClick={this.joinTeamEvent}>Update Team</button>;
     }
-    return <Link className="btn btn-secondary " to={'/teams'}>Return to All Teams View</Link>;
+    return <Link className="btn btn-secondary btn-outline-dark" to={'/teams'}>Return to All Teams View</Link>;
   }
 
   joinTeamEvent = (e) => {
@@ -79,20 +79,11 @@ class SingleTeamView extends React.Component {
                   </select>
                 </div>
               </div>
-              <button className="btn btn-dark" onClick={this.joinTeamEvent}>Save Team</button>
+              {/* <button className="btn btn-dark" onClick={this.joinTeamEvent}>Save Team</button> */}
             </form>;
     }
     return null;
   }
-
-  // teamData.createTeam(newTeam)
-  //     .then((theCreateTeam) => {
-  //       this.state.selectedPlayers.forEach((player) => {
-  //         playerData.updatePlayerTeamStatus(player.value, theCreateTeam.teamId);
-  //       });
-  //     })
-  //     .then(() => {
-  //       this.props.history.push('/teams');
 
   render() {
     const { team, players } = this.state;

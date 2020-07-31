@@ -61,9 +61,26 @@ namespace I_Got_Next_2.DataAccess
                             where PlayerId = @playerId";
             }
 
+            string playerCount;
+
+            playerCount = @"select count(TeamId)
+                            from Player
+                            where TeamId = @TeamId";
+
             using (var db = new SqlConnection(ConnectionString))
             {
                 var updatedPlayer = db.QueryFirstOrDefault(sql, new { teamId = teamId, playerId = playerId });
+
+                var numberOfPlayers = db.ExecuteScalar<int>(playerCount, new { teamId = teamId });
+
+                if (numberOfPlayers >= 5)
+                {
+                    var stuff = @"update Team
+                                set IsTeamCountFull = 1
+                                where TeamId = @TeamId";
+
+                    db.QueryFirstOrDefault<Team>(stuff, new { teamId = teamId });
+                }
 
                 return updatedPlayer;
             }
