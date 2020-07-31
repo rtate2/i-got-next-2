@@ -11,6 +11,7 @@ import Admin from '../components/pages/Admin/Admin';
 import CurrentGame from '../components/pages/CurrentGame/CurrentGame';
 import AvailablePlayers from '../components/pages/AvailablePlayers/AvailablePlayers';
 import SingleTeamView from '../components/pages/SingleTeamView/SingleTeamView';
+import EditCurrentGame from '../components/shared/EditCurrentGame/EditCurrentGame';
 import authData from '../helpers/data/authData';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -37,6 +38,7 @@ class App extends React.Component {
           <Route path="/currentgame" exact component={CurrentGame} />
           <Route path="/availableplayers" exact component={AvailablePlayers} />
           <Route path="/teams/singleteamview/:teamId" exact component={SingleTeamView} />
+          <Route path="/currentgame/edit" exact component={EditCurrentGame} />
         </Switch>
       </Router>
     </div>

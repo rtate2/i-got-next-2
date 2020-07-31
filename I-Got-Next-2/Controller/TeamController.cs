@@ -120,5 +120,52 @@ namespace I_Got_Next_2.Controller
 
             return Ok(nextTeam);
         }
+
+        //Update single team
+        [HttpPut("team/${teamId}/edit")]
+        public IActionResult UpdateSingleTeam(int teamId, TeamDBInfo updatedTeam)
+        {
+            var newProduct = _teamRepository.UpdateSingleTeam(teamId, updatedTeam);
+            return Ok(newProduct);
+        }
+
+        //Number of players on the team
+        [HttpGet("team/{teamId}/count")]
+        public IActionResult TeamMemberCount(int teamId)
+        {
+            var teamCount = _teamRepository.TeamMemberTotal(teamId);
+
+            if (teamCount == null)
+            {
+                return NotFound("The team doesn't have any players");
+            }
+
+            return Ok(teamCount);
+        }
+
+        //update teams's currently playing status
+        [HttpPut("currentgame/team/{teamId}")]
+        public IActionResult UpdateTeamCurrentlyPlayingStatus(int teamId)
+        {
+            var isATeam = _teamRepository.GetTeamById(teamId);
+
+            var teamNull = false;
+
+            if (isATeam != null)
+            {
+                if (!isATeam.IsCurrentlyPlaying)
+                {
+                    teamNull = true;
+                }
+            }
+            else
+            {
+                return NotFound("No team found");
+            }
+
+            var status = _teamRepository.UpdateTeamCurrentlyPlayingStatus(teamId, teamNull);
+
+            return Ok(status);
+        }
     }
 }

@@ -8,9 +8,12 @@ class SingleTeamView extends React.Component {
   state = {
     team: {},
     players: [],
+    allAvailablePlayers: [],
+    addedPlayerId: 0,
   };
 
   componentDidMount() {
+    this.getAllAvailablePlayers();
     const { teamId } = this.props.match.params;
     this.getPlayersByTeam(teamId);
     teamData.getSingleTeam(teamId)
@@ -28,12 +31,59 @@ class SingleTeamView extends React.Component {
       .catch((error) => console.error(error, 'error from get players by team id'));
   }
 
-  // buildButtons = () => {
-  //   if (this.state.team.IsTeamCountFull) {
-  //     return <button className="btn btn-outline-dark">View Teams</button>;
-  //   }
-  //   return <button className="btn btn-outline-dark">Join Team</button>;
-  // }
+  getAllAvailablePlayers = () => {
+    playerData.getAvailablePlayers()
+      .then((allAvailablePlayers) => {
+        this.setState({ allAvailablePlayers });
+      })
+      .catch((error) => console.error(error, 'error from get available players'));
+  }
+
+  nameChange = (e) => {
+    e.preventDefault();
+    this.setState({ addedPlayerId: e.target.value });
+  }
+
+  buildButtons = () => {
+    if (this.state.team.isTeamCountFull === false) {
+      return <button className="btn btn-primary btn-outline-dark" onClick={this.joinTeamEvent}>Update Team</button>;
+    }
+    return <Link className="btn btn-secondary btn-outline-dark" to={'/teams'}>Return to All Teams View</Link>;
+  }
+
+  joinTeamEvent = (e) => {
+    e.preventDefault();
+    const { teamId } = this.props.match.params;
+    playerData.updatePlayerTeamStatus(this.state.addedPlayerId, teamId)
+      .then(() => {
+        this.props.history.push('/teams');
+      });
+  }
+
+  playerCount = () => {
+    if (this.state.players.length < 5) {
+      return <form>
+               <div className="container d-flex">
+                <div className="form-group fg">
+                  <select
+                  className="form-control select-css"
+                  id="player-name"
+                  value={this.state.addedPlayerId}
+                  onChange={this.nameChange}
+                  >
+                    <option>Select Player to Add</option>
+                    {this.state.allAvailablePlayers.map((availPlayers) => <option
+                        value={availPlayers.playerId}
+                        key={availPlayers.playerId}
+                        id={availPlayers.playerId}>{availPlayers.firstName} {availPlayers.lastName}</option>)}
+                  </select>
+                </div>
+              </div>
+              {/* <button className="btn btn-dark" onClick={this.joinTeamEvent}>Save Team</button> */}
+            </form>;
+    }
+    return null;
+  }
 
   render() {
     const { team, players } = this.state;
@@ -43,8 +93,9 @@ class SingleTeamView extends React.Component {
         <h1>Single Team View</h1>
         <h3 className="card-title">{team.teamName}</h3>
         {players.map((player) => <h5 key={player.playerId}>{player.firstName} {player.lastName}</h5>)}
-        <Link className="btn btn-success" to={'/teams'}>Back to Teams</Link>
-        {/* {this.buildButtons()} */}
+        {/* <Link className="btn btn-success" to={'/teams'}>Back to Teams</Link> */}
+        {this.playerCount()}
+        {this.buildButtons()}
       </div>
     );
   }

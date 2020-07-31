@@ -149,5 +149,58 @@ namespace I_Got_Next_2.DataAccess
                 return team;
             }
         }
+
+        public TeamDBInfo UpdateSingleTeam(int teamId, TeamDBInfo updatedTeam)
+        {
+            var sql = @"update Team
+                        set TeamName=@TeamName,
+                        where TeamId=@TeamId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.QueryFirstOrDefault<TeamDBInfo>(sql, new { TeamId = teamId, TeamName = updatedTeam.TeamName });
+
+                return result;
+            }
+        }
+
+        //number of players on a team
+        public TeamNumber TeamMemberTotal(int teamId)
+        {
+            var sql = @"select count(TeamId) as TeamCount
+                        from Player
+                        where TeamId = @TeamId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var teamCount = db.QueryFirstOrDefault<TeamNumber>(sql, new { TeamId = teamId });
+
+                return teamCount;
+            }
+        }
+
+        public Team UpdateTeamCurrentlyPlayingStatus(int teamId, bool teamIsNotPlaying)
+        {
+            string sql;
+            if (teamIsNotPlaying)
+            {
+                sql = @"update Team
+                        set IsCurrentlyPlaying = 0
+                        where TeamId = @TeamId";
+            }
+            else
+            {
+                sql = @"update Team
+                        set IsCurrentlyPlaying = 1
+                        where TeamId = @TeamId";
+            }
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.QueryFirstOrDefault<Team>(sql, new { TeamId = teamId });
+
+                return result;
+            }
+        }
     }
 }

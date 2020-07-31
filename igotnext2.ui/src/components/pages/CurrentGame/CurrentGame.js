@@ -1,5 +1,6 @@
 import React from 'react';
 import './CurrentGame.scss';
+import { Link } from 'react-router-dom';
 import teamData from '../../../helpers/data/teamData';
 import GameTeams from '../../shared/GameTeams/GameTeams';
 
@@ -7,11 +8,13 @@ class CurrentGame extends React.Component {
   state = {
     currentTeams: [],
     nextTeam: {},
+    authStatus: false,
   }
 
   componentDidMount() {
     this.getCurrentGames();
     this.getNextTeam();
+    this.setState({ authStatus: sessionStorage.getItem('adminId') != null });
   }
 
   getCurrentGames() {
@@ -27,18 +30,23 @@ class CurrentGame extends React.Component {
   }
 
   render() {
-    const { currentTeams, nextTeam } = this.state;
+    const { currentTeams, nextTeam, authStatus } = this.state;
 
     return (
-        <div className="CurrentGame">
-            <h1>Current Game</h1>
+        <div className="container-fluid CurrentGame text-center">
+            <h1 className="Heading">Current Game</h1>
             {/* {currentTeams.map((team) => <h5 key={team.teamId}>{team.teamName}</h5>)} */}
-            <div className="d-flex flex-wrap">
+            <div className="CurrentGameTeams">
+              <p className="Court">Court 1</p>
               {currentTeams.map((team) => <GameTeams key={team.teamId} team={team} />)}
+              { authStatus && <Link to={'/currentgame/edit'}>Edit</Link> }
             </div>
             <div className="UpNext">
-              <h2>Up Next</h2>
-                <p>{nextTeam.teamName}</p>
+              <h2 className="Heading">Up Next...</h2>
+              <div className="UpNextTeam">
+                <p className="Court">Court 1</p>
+                <h4 className="nextTeam">{nextTeam.teamName}</h4>
+              </div>
             </div>
         </div>
     );
