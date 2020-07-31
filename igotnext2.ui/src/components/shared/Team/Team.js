@@ -16,6 +16,13 @@ class Team extends React.Component {
     teamToRemove(team.teamId);
   }
 
+  // renderTeamCountButtons = () => {
+  //   if (this.props.teamMemberCount < 5) {
+  //     return <button className="btn btn-success">Join Team</button>;
+  //   }
+  //   return <button className="btn btn-secondary">View Team</button>;
+  // }
+
   render() {
     const { team, authStatus } = this.props;
 
@@ -29,6 +36,7 @@ class Team extends React.Component {
             <div>
               <Link className="btn btn-primary btn-outline-dark teamBtn" to={`/teams/singleteamview/${team.teamId}`}>View Team</Link>
             </div>
+            {/* {this.renderTeamCountButtons()} */}
             { authStatus && <button className=" btn btn-danger" onClick={this.removeTeamEvent}>Delete</button> }
           </div>
         </div>

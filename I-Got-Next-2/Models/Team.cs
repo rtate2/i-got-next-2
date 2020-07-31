@@ -12,6 +12,7 @@ namespace I_Got_Next_2.Models
         public string TeamName { get; set; }
         public bool IsAvailable { get; set; }
         public bool IsTeamCountFull { get; set; }
+        public bool IsCurrentlyPlaying { get; set; }
     }
 
     public class TeamsWithPlayers
@@ -36,5 +37,21 @@ namespace I_Got_Next_2.Models
         public bool IsAvailable { get; set; }
         public bool IsTeamCountFull { get; set; }
         public bool IsCurrentlyPlaying { get; set; }
+    }
+
+    public class TeamDBInfo
+    {
+        public int TeamId { get; set; }
+        public DateTime Date { get; set; }
+        public string TeamName { get; set; }
+        public bool IsAvailable { get; set; }
+        public bool IsTeamCountFull { get; set; }
+        public bool IsCurrentlyPlaying { get; set; }
+    }
+
+    public class TeamNumber
+    {
+        public int TeamId { get; set; }
+        public int TeamCount { get; set; }
     }
 }

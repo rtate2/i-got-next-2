@@ -39,7 +39,7 @@ class CurrentGame extends React.Component {
             <div className="CurrentGameTeams">
               <p className="Court">Court 1</p>
               {currentTeams.map((team) => <GameTeams key={team.teamId} team={team} />)}
-              { authStatus && <Link>Edit</Link> }
+              { authStatus && <Link to={'/currentgame/edit'}>Edit</Link> }
             </div>
             <div className="UpNext">
               <h2 className="Heading">Up Next...</h2>

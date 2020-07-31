@@ -49,6 +49,10 @@ const getTeamUpNext = () => new Promise((resolve, reject) => {
 
 const removeTeamFromList = (teamId) => axios.put(`https://localhost:44317/api/adminportal/remove/${teamId}`);
 
+const updateSingleTeam = (teamId, newTeamObj) => axios.put(`https://localhost:44317/api/teams/team/${teamId}/edit`, newTeamObj);
+
+const getTeamMemberCount = (teamId) => axios.get(`https://localhost:44317/api/teams/team/${teamId}/count`);
+
 export default {
   getAllTeams,
   getTeamsWithPlayers,
@@ -57,4 +61,6 @@ export default {
   getCurrentGames,
   getTeamUpNext,
   removeTeamFromList,
+  updateSingleTeam,
+  getTeamMemberCount,
 };
