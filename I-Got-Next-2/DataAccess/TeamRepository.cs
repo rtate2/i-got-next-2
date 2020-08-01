@@ -178,29 +178,5 @@ namespace I_Got_Next_2.DataAccess
                 return teamCount;
             }
         }
-
-        public Team UpdateTeamCurrentlyPlayingStatus(int teamId, bool teamIsNotPlaying)
-        {
-            string sql;
-            if (teamIsNotPlaying)
-            {
-                sql = @"update Team
-                        set IsCurrentlyPlaying = 0
-                        where TeamId = @TeamId";
-            }
-            else
-            {
-                sql = @"update Team
-                        set IsCurrentlyPlaying = 1
-                        where TeamId = @TeamId";
-            }
-
-            using (var db = new SqlConnection(ConnectionString))
-            {
-                var result = db.QueryFirstOrDefault<Team>(sql, new { TeamId = teamId });
-
-                return result;
-            }
-        }
     }
 }

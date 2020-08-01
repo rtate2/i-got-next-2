@@ -39,12 +39,47 @@ namespace I_Got_Next_2.DataAccess
                         set IsAvailable = 0
                         where TeamId = @teamId";
 
+            var whoPlaying = @"select *
+                            from Team
+                            where IsCurrentlyPlaying = 1";
+
             using (var db = new SqlConnection(ConnectionString))
             {
                 var team = db.QueryFirstOrDefault<Team>(sql, new { TeamId = teamId });
 
+                var teamRemovedFromCourt = db.QueryFirstOrDefault<Team>(whoPlaying);
+
+                if (teamRemovedFromCourt.IsAvailable == false)
+                {
+                    var gone = @"update Team
+                                set IsCurrentlyPlaying = 0
+                                where TeamId = @TeamId";
+
+                    db.QueryFirstOrDefault<Team>(gone, new { TeamId = teamId });
+                }
+
                 return team;
             }
+        }
+
+        public Team UpdateTeamCurrentlyPlaying(int teamId)
+        {
+                var sql = @"update Team
+                            set IsCurrentlyPlaying = 1
+                            where TeamId = @TeamId";
+
+                var team = @"select *
+                        from Team
+                        where TeamId = @TeamId";
+
+                using (var db = new SqlConnection(ConnectionString))
+                {
+                    var teamPlaying = db.QueryFirstOrDefault<Team>(sql, new { TeamId = teamId });
+
+                var teams = db.QueryFirstOrDefault<Team>(team, new { TeamId = teamId });
+
+                    return teams;
+                }
         }
     }
 }

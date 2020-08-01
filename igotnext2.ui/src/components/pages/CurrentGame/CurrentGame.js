@@ -9,6 +9,7 @@ class CurrentGame extends React.Component {
     currentTeams: [],
     nextTeam: {},
     authStatus: false,
+    // currentGame: false,
   }
 
   componentDidMount() {
@@ -16,6 +17,10 @@ class CurrentGame extends React.Component {
     this.getNextTeam();
     this.setState({ authStatus: sessionStorage.getItem('adminId') != null });
   }
+
+  // needToRefreshPage() {
+  //   this.setState({ currentGame: true });
+  // }
 
   getCurrentGames() {
     teamData.getCurrentGames()

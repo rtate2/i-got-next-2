@@ -142,30 +142,5 @@ namespace I_Got_Next_2.Controller
 
             return Ok(teamCount);
         }
-
-        //update teams's currently playing status
-        [HttpPut("currentgame/team/{teamId}")]
-        public IActionResult UpdateTeamCurrentlyPlayingStatus(int teamId)
-        {
-            var isATeam = _teamRepository.GetTeamById(teamId);
-
-            var teamNull = false;
-
-            if (isATeam != null)
-            {
-                if (!isATeam.IsCurrentlyPlaying)
-                {
-                    teamNull = true;
-                }
-            }
-            else
-            {
-                return NotFound("No team found");
-            }
-
-            var status = _teamRepository.UpdateTeamCurrentlyPlayingStatus(teamId, teamNull);
-
-            return Ok(status);
-        }
     }
 }
