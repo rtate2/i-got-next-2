@@ -45,6 +45,19 @@ namespace I_Got_Next_2.Controller
                 _playerRepository.UpdateSinglePlayerStatus(player.playerId, teamId, true); // true makes a free agent
             }
 
+            return Ok(team);
+        }
+
+        //update teams's currently playing status
+        [HttpPut("currentgame/team/{teamId}")]
+        public IActionResult UpdateTeamCurrentlyPlayingStatus(int teamId)
+        {
+            var team = _adminRepository.UpdateTeamCurrentlyPlaying(teamId);
+
+            if (team == null)
+            {
+                return NotFound("Team is not currently playing");
+            }
 
             return Ok(team);
         }

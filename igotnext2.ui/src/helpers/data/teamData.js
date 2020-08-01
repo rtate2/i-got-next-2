@@ -53,6 +53,8 @@ const updateSingleTeam = (teamId, newTeamObj) => axios.put(`https://localhost:44
 
 const getTeamMemberCount = (teamId) => axios.get(`https://localhost:44317/api/teams/team/${teamId}/count`);
 
+const updateTeamCurrentlyPlayingStatus = (teamId) => axios.put(`https://localhost:44317/api/adminportal/currentgame/team/${teamId}`);
+
 export default {
   getAllTeams,
   getTeamsWithPlayers,
@@ -63,4 +65,5 @@ export default {
   removeTeamFromList,
   updateSingleTeam,
   getTeamMemberCount,
+  updateTeamCurrentlyPlayingStatus,
 };

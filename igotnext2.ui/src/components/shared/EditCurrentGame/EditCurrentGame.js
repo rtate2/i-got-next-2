@@ -19,24 +19,23 @@ class EditCurrentGame extends React.Component {
     this.setState({ selectedTeams: teamsFromMultiSelect });
   }
 
-  // saveCurrentGameEvent = (e) => {
+  // updateCurrentGameEvent = (e) => {
   //   e.preventDefault();
-  //   const newTeam = {
-  //     teamName: this.state.teamName,
-  //     Date: moment(),
-  //     isAvailable: this.state.isAvailable,
-  //     isTeamCountFull: this.state.isTeamCountFull,
-  //   };
-  //   teamData.createTeam(newTeam)
-  //     .then((theCreateTeam) => {
-  //       this.state.selectedPlayers.forEach((player) => {
-  //         playerData.updatePlayerTeamStatus(player.value, theCreateTeam.teamId);
-  //       });
-  //     })
-  //     .then(() => {
-  //       this.props.history.push('/teams');
-  //     });
+  //   const { selectedTeams } = this.state;
+  //   selectedTeams.map((team) => teamData.updateTeamCurrentlyPlayingStatus(team.value));
+  //   this.props.history.push('/currentgame');
   // }
+
+  updateCurrentGameEvent = (e) => {
+    e.preventDefault();
+    const { selectedTeams } = this.state;
+    selectedTeams.map((team) => {
+      teamData.updateTeamCurrentlyPlayingStatus(team.value)
+        .then(() => {
+          this.props.history.push('/currentgame');
+        });
+    });
+  }
 
   render() {
     const renderPlayerOptions = this.state.teams.map((team) => ({ label: `${team.teamName}`, value: team.teamId }));
@@ -55,7 +54,7 @@ class EditCurrentGame extends React.Component {
                 labelledBy={'Select'}
               />
           </div>
-          <button className="btn btn-dark" onClick={this.saveCurrentGameEvent}>Save Matchup</button>
+          <button className="btn btn-dark" onClick={this.updateCurrentGameEvent}>Save Matchup</button>
         </form>
       </div>
     );
