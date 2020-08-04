@@ -52,13 +52,13 @@ namespace I_Got_Next_2.DataAccess
             {
                 sql = @"update Player
                             set TeamId = null
-                            where PlayerId = @playerId";
+                            where PlayerId = @PlayerId";
             }
             else
             {
                sql = @"update Player
-                            set TeamId = @teamId
-                            where PlayerId = @playerId";
+                            set TeamId = @TeamId
+                            where PlayerId = @PlayerId";
             }
 
             string playerCount;
@@ -69,17 +69,26 @@ namespace I_Got_Next_2.DataAccess
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var updatedPlayer = db.QueryFirstOrDefault(sql, new { teamId = teamId, playerId = playerId });
+                var updatedPlayer = db.QueryFirstOrDefault(sql, new { TeamId = teamId, PlayerId = playerId });
 
-                var numberOfPlayers = db.ExecuteScalar<int>(playerCount, new { teamId = teamId });
+                var numberOfPlayers = db.ExecuteScalar<int>(playerCount, new { TeamId = teamId });
 
-                if (numberOfPlayers >= 5)
+                string stuff;
+                if (numberOfPlayers > 4)
                 {
-                    var stuff = @"update Team
-                                set IsTeamCountFull = 1
-                                where TeamId = @TeamId";
+                    stuff = @"update Team
+                            set IsTeamCountFull = 1
+                            where TeamId = @TeamId";
 
-                    db.QueryFirstOrDefault<Team>(stuff, new { teamId = teamId });
+                    db.QueryFirstOrDefault<Team>(stuff, new { TeamId = teamId });
+                }
+                else
+                {
+                    stuff = @"update Team
+                            set IsTeamCountFull = 0
+                            where TeamId = @TeamId";
+
+                    db.QueryFirstOrDefault<Team>(stuff, new { TeamId = teamId });
                 }
 
                 return updatedPlayer;

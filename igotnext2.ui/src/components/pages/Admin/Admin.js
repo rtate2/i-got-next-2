@@ -1,6 +1,7 @@
 import React from 'react';
 import './Admin.scss';
 import authData from '../../../helpers/data/authData';
+import basketball from '../../../images/basketball.png';
 
 class Admin extends React.Component {
   state = {
@@ -86,7 +87,7 @@ handleLogin = (e) => {
           <button className="btn btn-danger" type="submit" onClick={this.logoutClickEvent}>Logout</button>
         </form>
         <div>
-          <img src="https://cdn.freebiesupply.com/logos/thumbs/2x/ymca-3-logo.png" className="adminLogo" alt="YMCA logo"></img>
+          <img src={basketball} className="adminLogo" alt="basketball"></img>
         </div>
       </div>
     );

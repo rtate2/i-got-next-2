@@ -1,18 +1,11 @@
 .Home{
-  // background-color: #4e95ac;
-  // background-color: rgb(238, 236, 236);
-  background-color: rgb(243, 243, 243);
-  background-size: cover;
+  background-color: #F4B41A;
   height: 100vh;
-  padding-top: 10%;
+  padding-top: 8%;
 }
 
 .Home2{
-  padding-top: 15%;
-}
-
-.h1{
-  font-family: Georgia, serif;
+  padding-top: 5%;
 }
 
 .btn {
@@ -36,5 +29,21 @@
 }
 
 .homeImage{
-  opacity: 0.8;
+  margin-top: 75px;
+  margin-bottom: 25px;
+  width: 400px;
+  height: auto;
+}
+
+.ctButton{
+  background-color: #143D59;
+}
+
+.jtButton{
+  background-color: gray;
+   color: white;
+}
+
+.adminLink{
+  color: #143D59;
 }

@@ -41,21 +41,25 @@ class EditCurrentGame extends React.Component {
     const renderPlayerOptions = this.state.teams.map((team) => ({ label: `${team.teamName}`, value: team.teamId }));
 
     return (
-      <div className="EditCurrentGame">
+      <div className="container-fluid EditCurrentGame text-center">
         <h1>Edit Current Game</h1>
-        <form>
-          <div className="container d-flex">
-            <label htmlFor="PlayerName"><h3>Teams on the List</h3></label>
-              <label htmlFor="players"></label>
-              <MultiSelect
-                options={renderPlayerOptions}
-                value={this.state.selectedTeams}
-                onChange={this.teamChange}
-                labelledBy={'Select'}
-              />
-          </div>
-          <button className="btn btn-dark" onClick={this.updateCurrentGameEvent}>Save Matchup</button>
-        </form>
+        <div className="EditCurrentGameForm">
+          <form>
+            <div className="container d-flex">
+              <div className="multiselections">
+                <label htmlFor="PlayerName"><h3>Teams on the List</h3></label>
+                  <label htmlFor="players"></label>
+                  <MultiSelect
+                    options={renderPlayerOptions}
+                    value={this.state.selectedTeams}
+                    onChange={this.teamChange}
+                    labelledBy={'Select'}
+                  />
+              </div>
+            </div>
+            <button className="btn btn-dark SaveMatchup" onClick={this.updateCurrentGameEvent}>Save Matchup</button>
+          </form>
+        </div>
       </div>
     );
   }
