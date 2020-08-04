@@ -18,9 +18,9 @@ class Team extends React.Component {
 
   renderTeamCountButtons = () => {
     if (this.props.team.isTeamCountFull === false) {
-      return <Link className="btn btn-secondary btn-outline-dark teamBtn" to={`/teams/singleteamview/${this.props.team.teamId}`}>Join Team</Link>;
+      return <Link className="btn btn-secondary btn-outline-dark jTeamBtn" to={`/teams/singleteamview/${this.props.team.teamId}`}>Join Team</Link>;
     }
-    return <Link className="btn btn-primary btn-outline-dark teamBtn" to={`/teams/singleteamview/${this.props.team.teamId}`}>View Team</Link>;
+    return <Link className="btn btn-warning btn-outline-dark vTeamBtn" to={`/teams/singleteamview/${this.props.team.teamId}`}>View Team</Link>;
   }
 
   render() {
@@ -33,10 +33,9 @@ class Team extends React.Component {
           <div className="card-body">
             <h4 className="card-title">{team.teamName}</h4>
             <div>
-              {/* <Link className="btn btn-primary btn-outline-dark teamBtn" to={`/teams/singleteamview/${team.teamId}`}>View Team</Link> */}
+              {this.renderTeamCountButtons()}
             </div>
-            {this.renderTeamCountButtons()}
-            { authStatus && <button className=" btn btn-danger" onClick={this.removeTeamEvent}>Delete</button> }
+            { authStatus && <button className=" btn btn-danger deleteButton" onClick={this.removeTeamEvent}>Delete</button> }
           </div>
         </div>
       </div>

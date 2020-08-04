@@ -20,7 +20,7 @@ class AvailablePlayers extends React.Component {
     return (
       <div className="AvailablePlayers">
         <h1>Available Players</h1>
-        <div className="d-flex flex-wrap">
+        <div className="d-flex flex-wrap Players">
           { players.map((player) => <Player key={player.playerId} player={player} />)}
         </div>
       </div>

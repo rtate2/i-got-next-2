@@ -9,7 +9,6 @@ class CurrentGame extends React.Component {
     currentTeams: [],
     nextTeam: {},
     authStatus: false,
-    // currentGame: false,
   }
 
   componentDidMount() {
@@ -17,10 +16,6 @@ class CurrentGame extends React.Component {
     this.getNextTeam();
     this.setState({ authStatus: sessionStorage.getItem('adminId') != null });
   }
-
-  // needToRefreshPage() {
-  //   this.setState({ currentGame: true });
-  // }
 
   getCurrentGames() {
     teamData.getCurrentGames()
@@ -50,7 +45,7 @@ class CurrentGame extends React.Component {
               <h2 className="Heading">Up Next...</h2>
               <div className="UpNextTeam">
                 <p className="Court">Court 1</p>
-                <h4 className="nextTeam">{nextTeam.teamName}</h4>
+                <h3 className="nextTeam"><b>{nextTeam.teamName}</b></h3>
               </div>
             </div>
         </div>

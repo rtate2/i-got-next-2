@@ -3,6 +3,8 @@ import MultiSelect from 'react-multi-select-component';
 import moment from 'moment';
 import playerData from '../../../helpers/data/playerData';
 import teamData from '../../../helpers/data/teamData';
+import basketball from '../../../images/basketball.png';
+import './NewTeam.scss';
 
 class NewTeam extends React.Component {
   state = {
@@ -31,6 +33,9 @@ class NewTeam extends React.Component {
 
   saveTeamEvent = (e) => {
     e.preventDefault();
+    // get lenght of selectplayers
+    // if length is > 5 isTeamCountFull == this.state.isteamfull (false)
+    // else length == 5 then change state isteamcountfull from false to true
     const newTeam = {
       teamName: this.state.teamName,
       Date: moment(),
@@ -52,17 +57,15 @@ class NewTeam extends React.Component {
     const renderPlayerOptions = this.state.players.map((player) => ({ label: `${player.firstName} ${player.lastName}`, value: player.playerId }));
 
     return (
-      <div>
-        <h1>Add a Team</h1>
-        <div className="NewTeam">
-          <h1>Create Your New Team</h1>
-          <div className="container NewTeam2">
+      <div className="container-fluid NewTeam text-center">
+        <h1>Create Your New Team</h1>
+          <div className="NewTeamForm">
             <form>
               <div className="form-group input-css">
                 <label htmlFor="courtId"><h3>Team Name</h3></label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control form-control-lg"
                   id="teamName"
                   placeholder="Enter Team Name"
                   value={this.state.teamName}
@@ -70,7 +73,7 @@ class NewTeam extends React.Component {
                 />
               </div>
               <div className="container d-flex">
-              <div className="">
+              <div className="mulitSelection">
               <label htmlFor="PlayerName"><h3>Player Names</h3></label>
                   <label htmlFor="players"></label>
                   <MultiSelect
@@ -78,13 +81,16 @@ class NewTeam extends React.Component {
                     value={this.state.selectedPlayers}
                     onChange={this.playerChange}
                     labelledBy={'Select'}
+                    hasSelectAll={false}
                   />
               </div>
               </div>
-              <button className="btn btn-dark" onClick={this.saveTeamEvent}>Save Team</button>
+              <button className="btn btn-dark saveButton" onClick={this.saveTeamEvent}>Save Team</button>
             </form>
           </div>
-        </div>
+          <div>
+            <img src={basketball} className="adminLogo" alt="basketball"></img>
+          </div>
       </div>
     );
   }

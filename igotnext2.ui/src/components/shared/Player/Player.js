@@ -12,9 +12,9 @@ class Player extends React.Component {
 
     return (
       <div className="Player col-3 mb-3">
-        <div className="card">
+        <div className="card PlayerCard">
           <div className="card-body">
-            <h4 className="card-title">{player.firstName} {player.lastName}</h4>
+            <h4 className="card-title PlayerNames"><b>{player.firstName} {player.lastName}</b></h4>
           </div>
       </div>
       </div>

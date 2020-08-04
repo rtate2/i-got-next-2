@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './SingleTeamView.scss';
 import teamData from '../../../helpers/data/teamData';
 import playerData from '../../../helpers/data/playerData';
+import hoop from '../../../images/bballplayers.png';
 
 class SingleTeamView extends React.Component {
   state = {
@@ -46,9 +47,9 @@ class SingleTeamView extends React.Component {
 
   buildButtons = () => {
     if (this.state.team.isTeamCountFull === false) {
-      return <button className="btn btn-primary btn-outline-dark" onClick={this.joinTeamEvent}>Update Team</button>;
+      return <button className="btn btn-primary btn-outline-dark JoinTeamButt" onClick={this.joinTeamEvent}>Update Team</button>;
     }
-    return <Link className="btn btn-secondary btn-outline-dark" to={'/teams'}>Return to All Teams View</Link>;
+    return <Link className="btn btn-secondary btn-outline-dark JoinTeamButt" to={'/teams'}>Return to All Teams View</Link>;
   }
 
   joinTeamEvent = (e) => {
@@ -66,7 +67,7 @@ class SingleTeamView extends React.Component {
                <div className="container d-flex">
                 <div className="form-group fg">
                   <select
-                  className="form-control select-css"
+                  className="form-control select-css SingleTeamForm"
                   id="player-name"
                   value={this.state.addedPlayerId}
                   onChange={this.nameChange}
@@ -89,13 +90,18 @@ class SingleTeamView extends React.Component {
     const { team, players } = this.state;
 
     return (
-      <div className="SingleTeamView">
-        <h1>Single Team View</h1>
-        <h3 className="card-title">{team.teamName}</h3>
-        {players.map((player) => <h5 key={player.playerId}>{player.firstName} {player.lastName}</h5>)}
-        {/* <Link className="btn btn-success" to={'/teams'}>Back to Teams</Link> */}
-        {this.playerCount()}
-        {this.buildButtons()}
+      <div className="container-fluid SingleTeamView text-center">
+        <h1 className="SingleTeamTitle">Single Team View</h1>
+        <div className="TeamCard">
+          <h3 className="card-title TeamNames"><b>{team.teamName}</b></h3>
+          {players.map((player) => <h5 key={player.playerId}>{player.firstName} {player.lastName}</h5>)}
+          {/* <Link className="btn btn-success" to={'/teams'}>Back to Teams</Link> */}
+          {this.playerCount()}
+          {this.buildButtons()}
+        </div>
+        <div>
+          <img src={hoop} className="TeamLogo" alt="basketball hoop"></img>
+        </div>
       </div>
     );
   }

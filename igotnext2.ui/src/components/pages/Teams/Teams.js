@@ -49,7 +49,7 @@ class Teams extends React.Component {
         <div className="container-fluid Teams">
             <h1>Teams</h1>
             { this.state.showTeamForm && <AddTeam addTeam={this.addTeam} /> }
-            <div className="items d-flex flex-wrap">
+            <div className="items d-flex flex-wrap offset-1">
               {teams.map((team) => <Team key={team.teamId} team={team} authStatus={authStatus} teamToRemove={this.removeTeam} />)}
             </div>
         </div>
