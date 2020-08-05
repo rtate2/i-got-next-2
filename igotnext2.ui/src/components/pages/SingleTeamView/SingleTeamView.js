@@ -8,7 +8,7 @@ import hoop from '../../../images/bballplayers.png';
 class SingleTeamView extends React.Component {
   state = {
     team: {},
-    players: [],
+    playersOnTeam: [],
     allAvailablePlayers: [],
     addedPlayerId: 0,
   };
@@ -27,7 +27,7 @@ class SingleTeamView extends React.Component {
   getPlayersByTeam(teamId) {
     playerData.getPlayersByTeamId(teamId)
       .then((players) => {
-        this.setState({ players });
+        this.setState({ playersOnTeam: players });
       })
       .catch((error) => console.error(error, 'error from get players by team id'));
   }
@@ -46,7 +46,7 @@ class SingleTeamView extends React.Component {
   }
 
   buildButtons = () => {
-    if (this.state.team.isTeamCountFull === false) {
+    if (this.state.playersOnTeam.length < 5) {
       return <button className="btn btn-primary btn-outline-dark JoinTeamButt" onClick={this.joinTeamEvent}>Update Team</button>;
     }
     return <Link className="btn btn-secondary btn-outline-dark JoinTeamButt" to={'/teams'}>Return to All Teams View</Link>;
@@ -62,7 +62,7 @@ class SingleTeamView extends React.Component {
   }
 
   playerCount = () => {
-    if (this.state.players.length < 5) {
+    if (this.state.playersOnTeam.length < 5) {
       return <form>
                <div className="container d-flex">
                 <div className="form-group fg">
@@ -80,14 +80,13 @@ class SingleTeamView extends React.Component {
                   </select>
                 </div>
               </div>
-              {/* <button className="btn btn-dark" onClick={this.joinTeamEvent}>Save Team</button> */}
             </form>;
     }
     return null;
   }
 
   render() {
-    const { team, players } = this.state;
+    const { team, playersOnTeam: players } = this.state;
 
     return (
       <div className="container-fluid SingleTeamView text-center">
@@ -95,7 +94,6 @@ class SingleTeamView extends React.Component {
         <div className="TeamCard">
           <h3 className="card-title TeamNames"><b>{team.teamName}</b></h3>
           {players.map((player) => <h5 key={player.playerId}>{player.firstName} {player.lastName}</h5>)}
-          {/* <Link className="btn btn-success" to={'/teams'}>Back to Teams</Link> */}
           {this.playerCount()}
           {this.buildButtons()}
         </div>

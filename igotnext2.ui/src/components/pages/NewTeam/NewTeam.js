@@ -33,22 +33,14 @@ class NewTeam extends React.Component {
 
   saveTeamEvent = (e) => {
     e.preventDefault();
-    // get lenght of selectplayers
-    // if length is > 5 isTeamCountFull == this.state.isteamfull (false)
-    // else length == 5 then change state isteamcountfull from false to true
     const newTeam = {
       teamName: this.state.teamName,
       Date: moment(),
       isAvailable: this.state.isAvailable,
       isTeamCountFull: this.state.isTeamCountFull,
     };
-    teamData.createTeam(newTeam)
+    teamData.createTeam(newTeam, this.state.selectedPlayers)
       .then((theCreateTeam) => {
-        this.state.selectedPlayers.forEach((player) => {
-          playerData.updatePlayerTeamStatus(player.value, theCreateTeam.teamId);
-        });
-      })
-      .then(() => {
         this.props.history.push('/teams');
       });
   }

@@ -35,7 +35,6 @@ class CurrentGame extends React.Component {
     return (
         <div className="container-fluid CurrentGame text-center">
             <h1 className="Heading">Current Game</h1>
-            {/* {currentTeams.map((team) => <h5 key={team.teamId}>{team.teamName}</h5>)} */}
             <div className="CurrentGameTeams">
               <p className="Court">Court 1</p>
               {currentTeams.map((team) => <GameTeams key={team.teamId} team={team} />)}

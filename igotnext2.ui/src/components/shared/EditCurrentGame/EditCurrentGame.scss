@@ -4,21 +4,34 @@
 }
 
 .EditCurrentGameForm{
+  // border: 4px solid rgb(156, 149, 149);
+  // border-style: inset;
+  // padding: 15px 10px;
+  // width: 600px;
+  // height: auto;
+  // display: inline-block;
+  // margin: 50px;
+  // background-color: #F4B41A;
+
   border: 4px solid rgb(156, 149, 149);
   border-style: inset;
   padding: 15px 10px;
-  width: 600px;
+  width: 400px;
   height: auto;
   display: inline-block;
   margin: 50px;
-  background-color: #F4B41A;
+  // background-color: #F4B41A;
+  background-color: #143D59;
+  color: whitesmoke;
 }
 
-.multi-select{
-  width: 450px;
-  color: #143D59;
-}
+// .multi-select{
+//   width: 450px;
+//   color: #143D59;
+// }
 
 .SaveMatchup{
-  margin-top: 15px;
+  // margin-top: 15px;
+  background-color: #F4B41A;
+  margin-top: 10px;
 }

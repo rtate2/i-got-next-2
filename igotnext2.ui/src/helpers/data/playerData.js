@@ -9,15 +9,6 @@ const getAllPlayers = () => new Promise((resolve, reject) => {
     .catch((errFromGetAllTeams) => reject(errFromGetAllTeams));
 });
 
-// const getPlayerById = (player) => new Promise((resolve, reject) => {
-//   axios.get(`https://localhost:44317/api/players/${player.playerId}`)
-//     .then((result) => {
-//       const playerr = result.data;
-
-//       resolve(playerr);
-//     })
-//     .catch((error) => reject(error));
-// });
 const getPlayerById = (playerId) => axios.get(`https://localhost:44317/api/players/player/${playerId}`);
 
 const getAvailablePlayers = () => new Promise((resolve, reject) => {
