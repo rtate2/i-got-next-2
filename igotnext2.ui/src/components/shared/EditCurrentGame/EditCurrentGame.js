@@ -2,6 +2,7 @@ import React from 'react';
 import MultiSelect from 'react-multi-select-component';
 import './EditCurrentGame.scss';
 import teamData from '../../../helpers/data/teamData';
+import bball from '../../../images/basketball.png';
 
 class EditCurrentGame extends React.Component {
   state = {
@@ -53,6 +54,7 @@ class EditCurrentGame extends React.Component {
             <button className="btn btn-dark SaveMatchup" onClick={this.updateCurrentGameEvent}>Save Matchup</button>
           </form>
         </div>
+        <img src={bball} className="adminLogo" alt="basketball"></img>
       </div>
     );
   }

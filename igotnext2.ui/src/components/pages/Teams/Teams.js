@@ -47,9 +47,9 @@ class Teams extends React.Component {
 
     return (
         <div className="container-fluid Teams">
-            <h1>Teams</h1>
+            <h1>Waitlisted Teams</h1>
             { this.state.showTeamForm && <AddTeam addTeam={this.addTeam} /> }
-            <div className="items d-flex flex-wrap offset-1">
+            <div className="items d-flex flex-wrap offset-.8">
               {teams.map((team) => <Team key={team.teamId} team={team} authStatus={authStatus} teamToRemove={this.removeTeam} />)}
             </div>
         </div>

@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router, Route, Switch, Redirect,
 } from 'react-router-dom';
 import './App.css';
-import Navbar from '../components/shared/Navbar/Navbar';
+// import Navbar from '../components/shared/Navbar/Navbar';
 import Home from '../components/pages/Home/Home';
 import Teams from '../components/pages/Teams/Teams';
 import NewTeam from '../components/pages/NewTeam/NewTeam';
@@ -12,7 +12,8 @@ import CurrentGame from '../components/pages/CurrentGame/CurrentGame';
 import AvailablePlayers from '../components/pages/AvailablePlayers/AvailablePlayers';
 import SingleTeamView from '../components/pages/SingleTeamView/SingleTeamView';
 import EditCurrentGame from '../components/shared/EditCurrentGame/EditCurrentGame';
-import authData from '../helpers/data/authData';
+// import authData from '../helpers/data/authData';
+import TestNavbar from '../components/shared/Navbar/TestNavbar';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const authedStatus = sessionStorage.getItem('adminId') != null;
@@ -29,7 +30,8 @@ class App extends React.Component {
     return (
     <div className="App">
       <Router>
-        <Navbar />
+        {/* <Navbar /> */}
+        <TestNavbar />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/teams" exact component={Teams} />

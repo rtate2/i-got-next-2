@@ -1,68 +1,63 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# I-Got-Next-2.0
 
-## Available Scripts
+## Technologies Used
+* React
+* React Router DOM
+* JavaScript
+* Reactstrap
+* SCSS
+* C#
+* ASP.NET Core
+* SQL Server Management Studio / T-SQL
+* Git
+* GitHub
 
-In the project directory, you can run:
+## Description
+ “I Got Next 2.0” includes enhancements to the original "I Got Next" app.  The easy to use app displays the teams, in order, of which games will be played; making it easy for users to know when they will play and who they will be playing with. The added "Administrator Portal" allows more control over the list of games.
 
-### `npm start`
+ ![I Got Next 2.0 - Home Page]()
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The users will have access to the app via the gym kiosk/iPad where the players will create the teams or join teams and view the order of when the games will be played. Upon visiting the app the user will be able to view the available players by clicking the `Available Players` link within the navbar. The players listed have not been added to a team and are truly available to join a team. Once the player is added to the team, he/she will not appear within the list of players.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+![I Got Next 2.0 - Available Players]()
 
-### `npm test`
+After viewing the available players, the user can navigate back to the home page by clicking `Home` link or the logo within the navbar. Once back to the homepage, the user will have the option to click the `Create a Team` button which will take the user to a form or `Join a Team button` which will take the user to the list of teams already signed up on the list and show teams who don't have five players.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![I Got Next 2.0 - Create Team Form]()
 
-### `npm run build`
+![I Got Next 2.0 - Join a Team View]()
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+When the user sees the `Create Your New Team` form, there is an input to create a team name and multi-select dropdown menu to select the team of players. The user will click the save button to create the new team.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+The new team will print to the `Teams` page where the user can review the team by clicking the "View Team" button. If the team does not have five players, a Join Team button will render (instead of the View Team) and will allow a player to add their name to the team.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![I Got Next 2.0 - Teams]()
 
-### `npm run eject`
+![I Got Next 2.0 - Single Team View]()
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Once within the Single Team View the player can see who is playing on each team selected.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The player can also view the `Current Game` link which will show the current teams on the current and the next team set to play.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![I Got Next 2.0 - Current Game View]()
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+As an added feature to secure the list, there is an Admin Portal added which will allow the gym monitor to control which teams are removed from the list and to closely monitor the current game's winner and loser.
 
-## Learn More
+The administrator will gain access by logging in with user name and password credentials
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![I Got Next 2.0 - Admin Portal]()
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Once the administrator signs into the app he/she will be directed to the `Teams` page where there will be an option to update the list by removing the losing teams and/or teams who are not ready to play at the time their game is ready.
 
-### Code Splitting
+![I Got Next 2.0 - Admin Remove Team]()
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+The administrator will have access to update the `Current Game` page by clicking the edit button for the selected court and a form will appear where the two teams will be selected and saved, which will update the Current Game View.
 
-### Analyzing the Bundle Size
+![I Got Next 2.0 - Admin Remove Team]()
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+![I Got Next 2.0 - Admin Remove Team]()
 
-### Making a Progressive Web App
+Once the adminstrator logs off, the players will be able to see the updates and continue to to monitor the flow of the games.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## How to run
+* Working on that part...
