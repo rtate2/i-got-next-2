@@ -19,13 +19,6 @@ class EditCurrentGame extends React.Component {
     this.setState({ selectedTeams: teamsFromMultiSelect });
   }
 
-  // updateCurrentGameEvent = (e) => {
-  //   e.preventDefault();
-  //   const { selectedTeams } = this.state;
-  //   selectedTeams.map((team) => teamData.updateTeamCurrentlyPlayingStatus(team.value));
-  //   this.props.history.push('/currentgame');
-  // }
-
   updateCurrentGameEvent = (e) => {
     e.preventDefault();
     const { selectedTeams } = this.state;

@@ -8,7 +8,6 @@ class GameTeams extends React.Component {
     return (
       <div className="Team">
         <div className="card teamCard">
-          {/* <button type="button" className=" btn btn-link d-flex justify-content-end deleteButton" aria-label="Close">&times;</button> */}
           <div className="card-body">
             <h4 className="card-title">{team.teamName}</h4>
           </div>

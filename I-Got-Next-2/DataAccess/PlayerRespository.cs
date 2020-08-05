@@ -66,6 +66,10 @@ namespace I_Got_Next_2.DataAccess
             playerCount = @"select count(TeamId)
                             from Player
                             where TeamId = @TeamId";
+            using (var db = new SqlConnection(ConnectionString))
+            {
+
+            }
 
             using (var db = new SqlConnection(ConnectionString))
             {

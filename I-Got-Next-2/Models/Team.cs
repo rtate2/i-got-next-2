@@ -37,6 +37,7 @@ namespace I_Got_Next_2.Models
         public bool IsAvailable { get; set; }
         public bool IsTeamCountFull { get; set; }
         public bool IsCurrentlyPlaying { get; set; }
+        public List<int> PlayerIds { get; set; }
     }
 
     public class TeamDBInfo

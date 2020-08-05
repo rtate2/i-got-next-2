@@ -14,9 +14,12 @@ namespace I_Got_Next_2.Controller
     public class TeamController : ControllerBase
     {
         TeamRepository _teamRepository;
-        public TeamController(TeamRepository repository)
+        PlayerRespository _playerRespository;
+
+        public TeamController(TeamRepository repository, PlayerRespository playerRespository)
         {
             _teamRepository = repository;
+            _playerRespository = playerRespository;
         }
 
         // Get all teams
@@ -54,6 +57,10 @@ namespace I_Got_Next_2.Controller
             try
             {
                 var teamAdded = _teamRepository.AddedTeam(teamToAdd);
+                foreach (var playerId in teamToAdd.PlayerIds)
+                {
+                    _playerRespository.UpdateSinglePlayerStatus(playerId, teamAdded.TeamId, false);
+                }
 
                 return Created("", teamAdded);
             }
