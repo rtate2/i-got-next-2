@@ -28,8 +28,8 @@ class Teams extends React.Component {
 
   removeTeam = (teamId) => {
     teamData.removeTeamFromList(teamId)
-      .then(() => teamData.getAllTeams())
-      .then((teams) => this.setState({ teams }))
+      .then(() => teamData.getAllTeams()
+        .then((teams) => this.setState({ teams })))
       .catch((error) => console.error(error, 'error from remove team from list'));
   }
 
