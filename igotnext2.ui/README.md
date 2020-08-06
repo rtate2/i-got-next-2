@@ -58,4 +58,4 @@ The administrator will have access to update the `Current Game` page by clicking
 Once the adminstrator logs off, the players will be able to see the updates and continue to to monitor the flow of the games.
 
 ## How to run
-* View a live demo via the following link: https://share.vidyard.com/watch/kWv6qQLDYEVN5JwdrWuEGi?
+* View a live demo via the following link: https://share.vidyard.com/watch/nYw89z2ECRv5crEsqkq1qx?
